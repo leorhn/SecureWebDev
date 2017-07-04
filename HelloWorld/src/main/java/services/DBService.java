@@ -1220,7 +1220,7 @@ public static void addTag(int bookID, String tag){
 	
 public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomReservation){
 		
-		String sql= "INSERT INTO meeting_room (room_number, date, time_in, time_out) VALUES(?,?,?,?)";
+		String sql= "INSERT INTO meeting_room (room_number, user_name, date, time_in, time_out) VALUES(?,?,?,?)";
 		
 		Connection connection= DBPool.getInstance().getConnection();
 		PreparedStatement pstmt=null;
@@ -1228,9 +1228,10 @@ public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomR
 		try{
 			pstmt= connection.prepareStatement(sql);
 			pstmt.setInt(1, meetingRoomReservation.getRoomNum());
-			pstmt.setDate(2, meetingRoomReservation.getDate());
-			pstmt.setTime(3, meetingRoomReservation.getTimeIn());
-			pstmt.setTime(4, meetingRoomReservation.getTimeOut());
+			pstmt.setString(2, meetingRoomReservation.getUserName());
+			pstmt.setDate(3, meetingRoomReservation.getDate());
+			pstmt.setTime(4, meetingRoomReservation.getTimeIn());
+			pstmt.setTime(5, meetingRoomReservation.getTimeOut());
 			pstmt.executeUpdate();
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -1251,16 +1252,17 @@ public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomR
 		
 		boolean result = false;
 		
-		String sql= "UPDATE book SET room_number=?, date=?, time_in=?, time_out=? WHERE meeting_room_id=?";
+		String sql= "UPDATE book SET room_number=?, user_name=?, date=?, time_in=?, time_out=? WHERE meeting_room_id=?";
 		
 		Connection connection= DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		try{
 			pstmt.setInt(1, meetingRoomReservation.getRoomNum());
-			pstmt.setDate(2, meetingRoomReservation.getDate());
-			pstmt.setTime(3, meetingRoomReservation.getTimeIn());
-			pstmt.setTime(4, meetingRoomReservation.getTimeOut());
-			pstmt.setInt(5, meetingRoomReservation.getMeetingRoomID());
+			pstmt.setString(2, meetingRoomReservation.getUserName());
+			pstmt.setDate(3, meetingRoomReservation.getDate());
+			pstmt.setTime(4, meetingRoomReservation.getTimeIn());
+			pstmt.setTime(5, meetingRoomReservation.getTimeOut());
+			pstmt.setInt(6, meetingRoomReservation.getMeetingRoomID());
 			int check = pstmt.executeUpdate();
 			if(check!=0)
 				result = true;
@@ -1327,6 +1329,7 @@ public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomR
 				list.add(new MeetingRoomReservation());
 				list.get(list.size()-1).setMeetingRoomID(rs.getInt("meeting_room_id"));
 				list.get(list.size()-1).setRoomNum(rs.getInt("room_number"));
+				list.get(list.size()-1).setUserName(rs.getString("user_name"));
 				list.get(list.size()-1).setDate(rs.getDate("date"));
 				list.get(list.size()-1).setTimeIn(rs.getTime("time_in"));
 				list.get(list.size()-1).setTimeOut(rs.getTime("time_out"));
@@ -1367,6 +1370,7 @@ public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomR
 				list.add(new MeetingRoomReservation());
 				list.get(list.size()-1).setMeetingRoomID(rs.getInt("meeting_room_id"));
 				list.get(list.size()-1).setRoomNum(rs.getInt("room_number"));
+				list.get(list.size()-1).setUserName(rs.getString("user_name"));
 				list.get(list.size()-1).setDate(rs.getDate("date"));
 				list.get(list.size()-1).setTimeIn(rs.getTime("time_in"));
 				list.get(list.size()-1).setTimeOut(rs.getTime("time_out"));
