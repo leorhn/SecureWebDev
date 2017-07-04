@@ -7,18 +7,28 @@ public class MeetingRoomReservation {
 	
 	private int meetingRoomID;
 	private int roomNum;//1 to 5
+	private String userName;
 	private Date date;
 	private Time timeIn;
 	private Time timeOut;
 	
 	public MeetingRoomReservation(){}
 	
-	public MeetingRoomReservation(int roomNum, Date date, Time timeIn, Time timeOut) {
+	public MeetingRoomReservation(int roomNum, String userName, Date date, Time timeIn, Time timeOut) {
 		this.roomNum = roomNum;
+		this.userName = userName;
 		this.date = date;
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
 	}
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public int getMeetingRoomID() {
 		return meetingRoomID;
 	}
