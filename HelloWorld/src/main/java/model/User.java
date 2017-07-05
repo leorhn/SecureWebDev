@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class User {
 	
+	private int userNameID;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -18,8 +19,9 @@ public class User {
 	
 	public User(){}
 	
-	public User(String firstName, String middleName, String lastName, String userName, String password, String email,
+	public User(int userNameID, String firstName, String middleName, String lastName, String userName, String password, String email,
 			String idNumber, Date birthday, int questionID, String answer, String type) {
+		this.userNameID = userNameID;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -33,6 +35,14 @@ public class User {
 		this.type = type;
 	}
 	
+	public int getUserNameID() {
+		return userNameID;
+	}
+
+	public void setUserNameID(int userNameID) {
+		this.userNameID = userNameID;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

@@ -60,7 +60,7 @@ public class DBService {
 		Date parsed_bday = null;
 		java.sql.Date bday_sql = null;*/
 		
-		String sql= "INSERT INTO user (first_name,middle_name,last_name,user_name,pass_word,email_address,id_number,birthday,question_id,answer,"
+		String sql= "INSERT INTO user (username_id, first_name,middle_name,last_name,user_name,pass_word,email_address,id_number,birthday,question_id,answer,"
 				+ "account_type) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		
 		Connection connection= DBPool.getInstance().getConnection();
@@ -68,13 +68,14 @@ public class DBService {
 		
 		try{
 			pstmt= connection.prepareStatement(sql);
-			pstmt.setString(1, user.getFirstName());
-			pstmt.setString(2, user.getMiddleName());
-			pstmt.setString(3, user.getLastName());
-			pstmt.setString(4, user.getUserName());
-			pstmt.setString(5, user.getPassword());
-			pstmt.setString(6, user.getEmail());
-			pstmt.setString(7, user.getIdNumber());
+			pstmt.setInt(1, user.getUserNameID());
+			pstmt.setString(2, user.getFirstName());
+			pstmt.setString(3, user.getMiddleName());
+			pstmt.setString(4, user.getLastName());
+			pstmt.setString(5, user.getUserName());
+			pstmt.setString(6, user.getPassword());
+			pstmt.setString(7, user.getEmail());
+			pstmt.setString(8, user.getIdNumber());
 			/*try{
 				format = new SimpleDateFormat("yyyyMMdd");
 				parsed_bday = format.parse(user.getBirthday());
@@ -82,10 +83,10 @@ public class DBService {
 			}catch(Exception e){
 				e.printStackTrace();
 			}*/
-			pstmt.setDate(8, user.getBirthday());
-			pstmt.setInt(9, user.getQuestionID());
-			pstmt.setString(10, user.getAnswer());
-			pstmt.setString(11, user.getType());
+			pstmt.setDate(9, user.getBirthday());
+			pstmt.setInt(10, user.getQuestionID());
+			pstmt.setString(11, user.getAnswer());
+			pstmt.setString(12, user.getType());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e){
