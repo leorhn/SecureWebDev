@@ -32,23 +32,25 @@ margin: 0 auto;
 }
 
 </style>
+
+
 </head>
 <body>
   
 	<nav class="navbar navbar-default navbar-static-top">
 	  <div class="containter-fluid">
 	  	<div class="navbar-header">
-	  	  <a class="navbar-brand">Library</a>
+	  	  <a class="navbar-brand">Library - Staff</a>
 	  	</div>
 			<ul class="nav navbar-nav">
 		  <li><a href="homepage.jsp">Home</a></li>
-		  <li><a href="news.asp">User</a></li>
+		  <li><a href="news.asp">Staff</a></li>
 		  <li><a href="news.asp">Meeting Rooms</a></li>
+		  <li><a href="news.asp">Edit Books</a></li>
 		  <li><a href="contact.asp">Logout</a></li>
 		  	</ul>
 	  </div>
 	</nav>
-	
 	<div class="container center">
 		<form class="form-inline">
 			<div class="form-group">
@@ -68,17 +70,26 @@ margin: 0 auto;
  			  <div class="form-group">
 				   <label class="sr-only" for="search">Search</label>
 				   <input type="text" class="form-control" placeholder="Search for...">
-				<button type="submit" class="btn btn-default">Search</button>							
+				<button type="submit" class="btn btn-default">Search</button>
+				<button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					Add Book
+				</button>			
+							
 			</div>
 		</form>
 	</div>
+	
 	<div class="container-fluid top-buffer">
 		<div class= "col-lg-8">
 			<table class="table table-hover">
 				<tr>
-					<td class="col-lg-2">
-						<button type="button" class="btn btn-default btn-sm">
-		 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add to Cart
+					<td class="col-lg-1">
+						<button type="button" class="btn btn-default" >
+		 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default">
+		 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
 					</td>
 					<td>
@@ -91,9 +102,12 @@ margin: 0 auto;
 					</td>
 				</tr>
 				<tr>
-					<td class="col-lg-2">
-						<button type="button" class="btn btn-default btn-sm">
-		 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add to Cart
+					<td class="col-lg-1">
+						<button type="button" class="btn btn-default">
+		 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default">
+		 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
 					</td>
 					<td>

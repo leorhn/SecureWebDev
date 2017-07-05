@@ -38,12 +38,13 @@ margin: 0 auto;
 	<nav class="navbar navbar-default navbar-static-top">
 	  <div class="containter-fluid">
 	  	<div class="navbar-header">
-	  	  <a class="navbar-brand">Library</a>
+	  	  <a class="navbar-brand">Library - Administrator</a>
 	  	</div>
 			<ul class="nav navbar-nav">
 		  <li><a href="homepage.jsp">Home</a></li>
-		  <li><a href="news.asp">User</a></li>
+		  <li><a href="news.asp">Administrator</a></li>
 		  <li><a href="news.asp">Meeting Rooms</a></li>
+		  <li><a href="news.asp">Assign Account</a></li>
 		  <li><a href="contact.asp">Logout</a></li>
 		  	</ul>
 	  </div>

@@ -26,12 +26,13 @@
 	<nav class="navbar navbar-default navbar-static-top">
 	  <div class="containter-fluid">
 	  	<div class="navbar-header">
-	  	  <a class="navbar-brand">Library</a>
+	  	  <a class="navbar-brand">Library - Staff</a>
 	  	</div>
 			<ul class="nav navbar-nav">
 		  <li><a href="default.asp">Home</a></li>
-		  <li><a href="news.asp">User</a></li>
+		  <li><a href="news.asp">Staff</a></li>
 		  <li><a href="news.asp">Meeting Rooms</a></li>
+		  <li><a href="news.asp">Edit Books</a></li>
 		  <li><a href="contact.asp">Logout</a></li>
 		  	</ul>
 	  </div>
