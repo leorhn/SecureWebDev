@@ -479,6 +479,54 @@ public static void addBook(Book book){
 		return list;
 	}
 	
+	public static ArrayList<Book> getBooksByTitle(String title){
+
+		ArrayList<Book> list= new ArrayList<>();
+		String sql;
+		Connection connection= DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		title = "%"+title+"%";
+		try{
+			sql="SELECT * FROM book WHERE title LIKE ?";
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.executeQuery();
+			rs = pstmt.getResultSet();
+			while(rs.next()){
+				list.add(new Book());
+				list.get(list.size()-1).setBookID(rs.getInt("book_id"));
+				list.get(list.size()-1).setLocation(rs.getInt("location"));
+				list.get(list.size()-1).setTitle(rs.getString("title"));
+				list.get(list.size()-1).setAuthor(rs.getString("author"));
+				list.get(list.size()-1).setPublisher(rs.getString("publisher"));
+				list.get(list.size()-1).setYear(rs.getString("year"));
+				list.get(list.size()-1).setStatus(rs.getString("status"));
+				list.get(list.size()-1).setType(rs.getString("type"));
+			}
+
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally{
+			try{
+				if(!pstmt.isClosed())
+					pstmt.close();
+				connection.close();
+				if(!rs.isClosed())
+					rs.close();
+			} catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		for(int i=0; i<list.size(); i++){
+			list.get(i).setTags(getTags(list.get(i).getBookID()));
+		}
+		
+		return list;
+	}
+	
 	public static ArrayList<Book> getBooksByAuthor(String author){
 
 		ArrayList<Book> list= new ArrayList<>();
@@ -486,8 +534,9 @@ public static void addBook(Book book){
 		Connection connection= DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		author = "%"+author+"%";
 		try{
-			sql="SELECT * FROM book WHERE author=?";
+			sql="SELECT * FROM book WHERE author LIKE ?";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, author);
 			pstmt.executeQuery();
@@ -533,8 +582,9 @@ public static void addBook(Book book){
 		Connection connection= DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		publisher = "%"+publisher+"%";
 		try{
-			sql="SELECT * FROM book WHERE publisher=?";
+			sql="SELECT * FROM book WHERE publisher LIKE ?";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, publisher);
 			pstmt.executeQuery();
@@ -1389,6 +1439,58 @@ public static void addMeetingRoomReservation(MeetingRoomReservation meetingRoomR
 			} catch(SQLException e){
 				e.printStackTrace();
 			}
+		}
+		
+		return list;
+	}
+	
+	public static ArrayList<Book> searchBooks(String s){
+
+		ArrayList<Book> list= new ArrayList<>();
+		String sql;
+		Connection connection= DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String temp = "%";
+		s = temp.concat(s+"%");
+		try{
+			sql="SELECT * FROM book WHERE author LIKE ? OR title LIKE ? OR publisher LIKE ? OR type LIKE ?";
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, s);
+			pstmt.setString(2, s);
+			pstmt.setString(3, s);
+			pstmt.setString(4, s);
+			pstmt.executeQuery();
+			rs = pstmt.getResultSet();
+			while(rs.next()){
+				list.add(new Book());
+				list.get(list.size()-1).setBookID(rs.getInt("book_id"));
+				list.get(list.size()-1).setLocation(rs.getInt("location"));
+				list.get(list.size()-1).setTitle(rs.getString("title"));
+				list.get(list.size()-1).setAuthor(rs.getString("author"));
+				list.get(list.size()-1).setPublisher(rs.getString("publisher"));
+				list.get(list.size()-1).setYear(rs.getString("year"));
+				list.get(list.size()-1).setStatus(rs.getString("status"));
+				list.get(list.size()-1).setType(rs.getString("type"));
+			}
+
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally{
+			try{
+				if(!pstmt.isClosed())
+					pstmt.close();
+				connection.close();
+				if(!rs.isClosed())
+					rs.close();
+			} catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		for(int i=0; i<list.size(); i++){
+			list.get(i).setTags(getTags(list.get(i).getBookID()));
 		}
 		
 		return list;
